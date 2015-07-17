@@ -1,6 +1,27 @@
 " This is atalw's .vimrc
 
-" [ Preferences ]
+
+" [ Vundle Setup ] {{{1 
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'morhetz/gruvbox'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" [ Preferences ] {{{1
 let mapleader="\<Space>"		" Set global mapleader
 set autoindent
 set smarttab
@@ -10,6 +31,10 @@ set tabstop=4
 set smartindent
 set backspace=indent,eol,start
 set history=1000
+set nobackup
+set noswapfile
+set ttyfast
+set hidden
 " Appearance {{{2
 set number				" Always show line numbers
 set numberwidth=3
@@ -18,13 +43,14 @@ set ruler				" Show line number and cursor position
 set wrap
 " Colors and Theme {{{2
 syntax enable
-colorscheme badwolf 
+set background=dark
+colorscheme gruvbox
 " Searching and Moving {{{2
 set ignorecase				" Ignore case when searching
 set smartcase				" Be smart about cases
 set incsearch				" Enable highlighted case-insensitive incremential search
 
-" [ Mappings ]
+" [ Mappings ] {{{1
 " Escaping {{{2
 inoremap jj <ESC>:w<CR>
 inoremap jk <ESC>:w<CR>
@@ -39,10 +65,17 @@ map <C-l> <C-w>l
 " Window Resizing {{{2
 nnoremap <Left> :vertical resize +1<CR>
 nnoremap <Right> :vertical resize -1<CR>
-nnoremap <Up> :vertical resize +1<CR>
-nnoremap <Down> :vertical resize -1<CR>
+nnoremap <Up> :horizontal resize +1<CR>
+nnoremap <Down> :horizonal resize -1<CR>
 
-" [ Leader Mappings ]
+" Bubble single lines {{{2
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+" [ Leader Mappings ] {{{1
 " Surround selection with -- ` ' " {{{2
 nnoremap <leader>` 0v$S`
 nnoremap <leader>' viwS'
@@ -58,6 +91,12 @@ map <leader>y "+y
 nmap <leader>ev :tabedit $MYVIMRC<CR>
 nnoremap <leader>v <C-w><C-v><C-l>:e $MYVIMRC<cr>
 " Autoload(source) vimrc after each save {{{3
-if has("autocmd")
-    autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
+" Resize splits when window is resized {{{2
+au VimResized * exe "normal! \<c-w>="
+" [ Modeline ] {{{1
+set modelines=1
+" vim: set foldmethod=marker:
