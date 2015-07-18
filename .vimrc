@@ -1,6 +1,6 @@
 " |-----------------------|
 " | This is atalw's .vimrc|
-" |------------------------
+" |-----------------------|
 
 
 " [ Vundle Setup ] {{{1 
@@ -116,8 +116,9 @@ au VimResized * exe "normal! \<c-w>="
 " [ Plugins ] {{{1
 " Nerdtree {{{2
 map <C-n><C-t> :NERDTreeToggle<CR>
-" Start NERDTree automatically when vim starts
-autocmd vimenter * NERDTree
+" Start NERDTree automatically when vim starts (if no file is specified)
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Exit Vim if NERDTree is last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Display Bookmarks by default
