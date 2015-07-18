@@ -16,16 +16,20 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'morhetz/gruvbox'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-commentary'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-surround'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " [ Preferences ] {{{1
-let mapleader="\<Space>"		" Set global mapleader
+let mapleader="\<Space>"		 " Set global mapleader
 set autoindent
 set smarttab
-set expandtab                           " Use spaces instead of tabs
+" set expandtab                    " Use spaces instead of tabs
 set shiftwidth=4
 set tabstop=4
 set smartindent
@@ -35,21 +39,26 @@ set nobackup
 set noswapfile
 set ttyfast
 set hidden
+" Save undo history {{{2
+set undofile
+set undodir=~/.vim/undodir
 " Appearance {{{2
-set number				" Always show line numbers
+set number				        " Always show line numbers
 set numberwidth=3
-set cursorline				" Highlight current line
-set ruler				" Show line number and cursor position
+set cursorline				    " Highlight current line
+set ruler				        " Show line number and cursor position
 set wrap
+set wildmenu
+set showmatch                   " highlight matching [{()}]
 " Colors and Theme {{{2
-syntax enable
+syntax on
 set background=dark
 colorscheme gruvbox
 " Searching and Moving {{{2
 set ignorecase				" Ignore case when searching
 set smartcase				" Be smart about cases
 set incsearch				" Enable highlighted case-insensitive incremential search
-
+set scrolloff=1
 " [ Mappings ] {{{1
 " Escaping {{{2
 inoremap jj <ESC>:w<CR>
@@ -74,7 +83,10 @@ nmap <C-Down> ]e
 " Bubble multiple lines
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
-
+" Movement {{{2
+" Move vertically by visual line
+nnoremap j gj
+nnoremap k gk
 " [ Leader Mappings ] {{{1
 " Surround selection with -- ` ' " {{{2
 nnoremap <leader>` 0v$S`
