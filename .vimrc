@@ -1,6 +1,6 @@
-" |-----------------------|
-" | This is atalw's .vimrc|
-" |-----------------------|
+" |-------|-
+" | atalw |
+" |-------|
 
 
 " [ Vundle Setup ] {{{1 
@@ -19,12 +19,25 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'morhetz/gruvbox'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-commentary'
-Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'godlygeek/tabular'
+Plugin 'mattn/emmet-vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'othree/html5.vim'
+Plugin 'ervandew/supertab'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'kana/vim-smartinput'
+Plugin 'itchyny/lightline.vim'
+Plugin 'hail2u/vim-css3-syntax'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -42,8 +55,11 @@ set backspace=indent,eol,start
 set history=1000
 set nobackup
 set noswapfile
+
 set ttyfast
 set hidden
+set breakindent
+set autoread
 " Save undo history {{{2
 set undofile
 set undodir=~/.vim/undodir
@@ -60,7 +76,7 @@ set listchars=tab:▸\ ,eol:¬
 " Colors and Theme {{{2
 syntax on
 set background=dark
-colorscheme gruvbox
+colorscheme  badwolf
 " Searching and Moving {{{2
 set ignorecase				" Ignore case when searching
 set smartcase				" Be smart about cases
@@ -123,11 +139,53 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Display Bookmarks by default
 let NERDTreeShowBookmarks=1
-" Airline {{{2
-" Fix airline not working bug
+" Lightline{{{2
 set laststatus=2
+let g:lightline = {
+	 \ 'colorscheme': 'powerline',
+	  \ 'active': {
+	  \   'left': [ [ 'mode', 'paste' ],
+	  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+	  \ },
+	  \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+	  \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+	  \ 'component': {
+	  \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+	  \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+	  \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+	  \ },
+	  \ 'component_visible_condition': {
+	  \   'readonly': '(&filetype!="help"&& &readonly)',
+	  \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+	  \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+	  \ },
+	  \ }
 " Tabularize {{{2
 vnoremap <leader>t :Tabular<space>/
+" Syntastic {{{2
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+let g:syntastic_loc_list_height = 2
+let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
+let g:syntastic_javascript_checkers = ['eslint']
+" YCM {{{2
+" YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+" SuperTab {{{2
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+" Ultisnips {{{2
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="s<tab>"
+" Toggle errors
+nmap <leader>st :SyntasticToggleMode<CR>
 " [ Modeline ] {{{1
 set modelines=1
 " vim: set foldmethod=marker:
