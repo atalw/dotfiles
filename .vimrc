@@ -173,6 +173,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 2
 let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_mode_map = {
+		\ "mode": "passive",
+		\ "active_filetypes": ["ruby"],
+		\ "passive_filetypes": [] }
 " YCM {{{2
 " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']

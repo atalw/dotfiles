@@ -49,7 +49,7 @@ ZSH_THEME="agnostersmod"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git web-search)
 
 # User configuration
 
@@ -83,3 +83,18 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH="/usr/local/sbin:$PATH"
+
+# chrome fileName
+# eg. chrome index.html
+chrome () {
+	open -a "Google Chrome" "$1"
+}
+
+safari () {
+	open -a "Safari" "$1"
+}
+
+# Open Facebook
+facebook() {
+	open "http://www.facebook.com"
+}
