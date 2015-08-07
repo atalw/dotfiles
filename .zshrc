@@ -98,3 +98,8 @@ safari () {
 facebook() {
 	open "http://www.facebook.com"
 }
+
+#Open Reddit
+reddit() {
+	open "http://www.reddit.com"
+}
