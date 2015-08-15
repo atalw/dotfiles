@@ -85,7 +85,6 @@ set scrolloff=1
 " [ Mappings ] {{{1
 " Escaping {{{2
 inoremap jj <ESC>:w<CR>
-inoremap jk <ESC>:w<CR>
 nmap fq :q!<CR>
 " Folding {{{2
 nnoremap <Tab> za
