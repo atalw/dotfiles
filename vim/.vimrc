@@ -33,6 +33,8 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kana/vim-smartinput'
 Plugin 'itchyny/lightline.vim'
 Plugin 'hail2u/vim-css3-syntax'
+Plugin 'chriskempson/tomorrow-theme'
+Plugin 'chriskempson/base16-vim'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
@@ -76,7 +78,7 @@ set listchars=tab:▸\ ,eol:¬
 " Colors and Theme {{{2
 syntax on
 set background=dark
-colorscheme  badwolf
+colorscheme base16-default
 " Searching and Moving {{{2
 set ignorecase				" Ignore case when searching
 set smartcase				" Be smart about cases

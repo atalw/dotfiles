@@ -1,9 +1,11 @@
 #### COLOUR
 
 tm_icon="♟"
-tm_color_active=colour213
+tm_color_active=colour8
+tm_color_bg=colour10
 tm_color_inactive=colour241
 tm_color_feature=colour4
+tm_color_pane=colour1
 tm_color_music=colour203
 
 # separators
@@ -18,9 +20,9 @@ set -g status-interval 5
 
 
 # default statusbar colors
-# set-option -g status-bg colour0
-set-option -g status-fg $tm_color_active
-set-option -g status-bg default
+#set-option -g status-bg colour0
+set-option -g status-fg $tm_color_bg
+set-option -g status-bg $tm_color_bg
 set-option -g status-attr default
 
 # default window title colors
@@ -35,7 +37,7 @@ set-window-option -g  window-status-current-format "#[bold]#I #W"
 
 # pane border
 set-option -g pane-border-fg $tm_color_inactive
-set-option -g pane-active-border-fg $tm_color_active
+set-option -g pane-active-border-fg $tm_color_pane
 
 # message text
 set-option -g message-bg default
@@ -46,15 +48,15 @@ set-option -g display-panes-active-colour $tm_color_active
 set-option -g display-panes-colour $tm_color_inactive
 
 # clock
-set-window-option -g clock-mode-colour $tm_color_active
+set-window-option -g clock-mode-colour $tm_color_feature
 
 tm_spotify="#[fg=$tm_color_music]#(osascript ~/applescripts/spotify.scpt)"
 tm_itunes="#[fg=$tm_color_music]#(osascript ~/applescripts/itunes.scpt)"
 #tm_battery="#(~/.dotfiles/bin/battery_indicator.sh)"
 
-tm_date="#[fg=$tm_color_inactive] %R %d %b"
+tm_date="#[fg=$tm_color_feature] %R %d %b"
 tm_host="#[fg=$tm_color_feature,bold]#h"
 tm_session_name="#[fg=$tm_color_feature,bold]$tm_icon #S"
 
 set -g status-left $tm_session_name' '
-set -g status-right $tm_itunes' '$tm_rdio' '$tm_spotify' '$tm_date' '$tm_host
+set -g status-right $tm_itunes' '$tm_spotify' '$tm_date' '$tm_host
