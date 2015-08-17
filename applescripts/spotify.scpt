@@ -4,7 +4,7 @@ if application "Spotify" is running then
 		set theArtist to artist of the current track
 		try
 			return "♫ " & theName & " - " & theArtist
-		on error err
+			on error err
 		end try
 	end tell
 end if
