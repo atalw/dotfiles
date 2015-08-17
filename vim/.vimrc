@@ -52,6 +52,7 @@ set smarttab
 " set expandtab                 " Use spaces instead of tabs
 set shiftwidth=4
 set tabstop=4
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
 set smartindent
 set backspace=indent,eol,start
 set history=1000
