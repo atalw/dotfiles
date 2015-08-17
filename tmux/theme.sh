@@ -52,6 +52,7 @@ set-window-option -g clock-mode-colour $tm_color_feature
 
 tm_spotify="#[fg=$tm_color_music]#(osascript ~/applescripts/spotify.scpt)"
 tm_itunes="#[fg=$tm_color_music]#(osascript ~/applescripts/itunes.scpt)"
+tm_chrome="#[fg=$tm_color_music]#(osascript ~/applescripts/playlister.scpt)"
 #tm_battery="#(~/.dotfiles/bin/battery_indicator.sh)"
 
 tm_date="#[fg=$tm_color_feature] %R %d %b"
@@ -59,4 +60,4 @@ tm_host="#[fg=$tm_color_feature,bold]#h"
 tm_session_name="#[fg=$tm_color_feature,bold]$tm_icon #S"
 
 set -g status-left $tm_session_name' '
-set -g status-right $tm_itunes' '$tm_spotify' '$tm_date' '$tm_host
+set -g status-right $tm_chrome' '$tm_itunes' '$tm_spotify' '$tm_date' '$tm_host
