@@ -21,7 +21,8 @@ Plugin 'morhetz/gruvbox'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
+"Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
 Plugin 'godlygeek/tabular'
 Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/syntastic'
@@ -192,6 +193,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="s<tab>"
 " Toggle errors
 nmap <leader>st :SyntasticToggleMode<CR>
+" Commentary {{{2
+nmap <leader>c gcc
+nmap zz yygccp
 " [ Modeline ] {{{1
 set modelines=1
 " vim: set foldmethod=marker:
