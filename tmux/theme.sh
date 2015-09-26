@@ -27,13 +27,13 @@ set-option -g status-attr default
 
 # default window title colors
 set-window-option -g window-status-fg $tm_color_inactive
-set-window-option -g window-status-bg default
-set -g window-status-format "#I #W"
+# set-window-option -g window-status-bg default
+set -g window-status-format "#W"
 
 # active window title colors
-set-window-option -g window-status-current-fg $tm_color_active
-set-window-option -g window-status-current-bg default
-set-window-option -g  window-status-current-format "#[bold]#I #W"
+set-window-option -g window-status-current-fg $tm_color_bg
+# set-window-option -g window-status-current-bg default
+set-window-option -g  window-status-current-format "#[bold]#W"
 
 # pane border
 set-option -g pane-border-fg $tm_color_inactive
@@ -53,7 +53,6 @@ set-window-option -g clock-mode-colour $tm_color_feature
 tm_spotify="#[fg=$tm_color_music]#(osascript ~/applescripts/spotify.scpt)"
 tm_itunes="#[fg=$tm_color_music]#(osascript ~/applescripts/itunes.scpt)"
 tm_chrome="#[fg=$tm_color_music]#(osascript ~/applescripts/playlister.scpt)"
-#tm_battery="#(~/.dotfiles/bin/battery_indicator.sh)"
 
 tm_date="#[fg=$tm_color_feature] %R %d %b"
 tm_host="#[fg=$tm_color_feature,bold]#h"
