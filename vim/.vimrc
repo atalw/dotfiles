@@ -11,7 +11,7 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle, required
+"  let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
 " plugin on GitHub repo
@@ -36,8 +36,15 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'chriskempson/tomorrow-theme'
 Plugin 'chriskempson/base16-vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'digitaltoad/vim-pug'
+Plugin 'tomasr/molokai'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
+
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Quramy/tsuquyomi'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
@@ -51,8 +58,10 @@ let mapleader="\<Space>"		" Set global mapleader
 set autoindent
 set smarttab
 " set expandtab                 " Use spaces instead of tabs
-set shiftwidth=4
-set tabstop=4
+set noexpandtab
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 set smartindent
 set backspace=indent,eol,start
@@ -64,6 +73,8 @@ set ttyfast
 set hidden
 set breakindent
 set autoread
+scriptencoding utf-8
+set encoding=utf-8
 " Save undo history {{{2
 set undofile
 set undodir=~/.vim/undodir
@@ -76,11 +87,12 @@ set wrap
 set wildmenu
 set showmatch     " highlight matching [{()}]
 set list
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:\|\ ,trail:·,eol:¬
 " Colors and Theme {{{2
 syntax on
 set background=dark
-colorscheme base16-default
+" let g:rehash256 = 1
+colorscheme molokai
 " Searching and Moving {{{2
 set ignorecase				" Ignore case when searching
 set smartcase				" Be smart about cases
@@ -196,6 +208,11 @@ nmap <leader>st :SyntasticToggleMode<CR>
 " Commentary {{{2
 nmap <leader>c gcc
 nmap zz yygccp
+" YouCompleteMe {{{2
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 " [ Modeline ] {{{1
 set modelines=1
 " vim: set foldmethod=marker:
