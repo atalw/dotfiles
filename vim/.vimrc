@@ -201,7 +201,7 @@ let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
 " Ultisnips {{{2
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="a"
 let g:UltiSnipsJumpBackwardTrigger="s<tab>"
 " Toggle errors
 nmap <leader>st :SyntasticToggleMode<CR>

@@ -53,6 +53,7 @@ DISABLE_AUTO_TITLE="true"
 # User configuration
 # To support latex on El Capitan
 export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
+export PYTHONPATH=~/git/caffe/python
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -81,8 +82,9 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# alia sohmyzsh="mate ~/.oh-my-zsh"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/lib/google-cloud-sdk/bin:$PATH"
 
 # chrome fileName
 # eg. chrome index.html
@@ -106,3 +108,13 @@ reddit() {
 
 
 alias tmux="tmux -u"
+alias sshaws="cd /Users/atalw/Documents/AWS_EC2 && ssh -i "cryptareNVirginia.pem" ubuntu@ec2-34-228-39-216.compute-1.amazonaws.com"
+alias sshblog="cd /Users/atalw/Documents/AWS_EC2 && ssh -i "cryptareNVirginia.pem" bitnami@ec2-184-73-138-105.compute-1.amazonaws.com"
+alias sshCharcoal="cd /Users/atalw/Documents/AWS_EC2 && ssh -i "charcoalSSHKey.pem" ec2-user@ec2-13-233-128-144.ap-south-1.compute.amazonaws.com"
+
+alias cryptare="cd ~/Documents/dev/ios/Btc"
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/atalw/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/atalw/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/atalw/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/atalw/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
