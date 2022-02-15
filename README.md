@@ -2,7 +2,14 @@
 All my configurations
 
 # Configuration
-Oh-my-zsh | Tmux | Vim | iTerm2
+Fish | Vim
 
-## Font
-https://github.com/powerline/fonts/blob/master/SourceCodePro/Sauce%20Code%20Powerline%20Light.otf
+# Symlink files for Vim
+
+First delete both files if they exist.
+
+Symlink `.vimrc`
+> `ln -s path/to/git/dotfiles/.vimrc ~/.vimrc`
+
+Symlink `.vim`
+> `ln -s path/to/git/dotfiles/vim ~/.vim`

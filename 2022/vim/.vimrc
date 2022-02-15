@@ -2,7 +2,21 @@ set nocompatible
 filetype on
 
 syntax on
-set background=dark
+" Important!!
+if has('termguicolors')
+    set termguicolors
+endif
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+" Fix italic comment background color issue
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+colorscheme gruvbox-material
+" hi Comment term=bold cterm=NONE ctermfg=245 gui=NONE guifg=#928374
+
 
 set autoindent
 set smarttab
@@ -40,7 +54,6 @@ set wildmode=list:longest
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 " MAPPINGS ----------------------------------------- {{{1
-
 
 " Escaping {{{2
 
@@ -80,7 +93,6 @@ map <Leader>p :set paste<CR>"*]p:set nopaste<CR>
 map <leader>y "+y
 
 " }}}
-
 
 " }}}
 
