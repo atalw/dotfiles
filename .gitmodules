@@ -1,0 +1,3 @@
+[submodule "2022/vim/.vim/pack/coc/start/coc.nvim"]
+	path = 2022/vim/.vim/pack/coc/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git

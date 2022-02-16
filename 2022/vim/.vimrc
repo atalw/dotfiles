@@ -33,7 +33,8 @@ set encoding=utf-8
 set number
 set numberwidth=3
 set ruler
-set wrap
+" set wrap
+set nowrap
 set list
 set listchars=tab:\|\ ,trail:·,eol:¬
 set scrolloff=5
