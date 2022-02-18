@@ -78,14 +78,18 @@ nnoremap j gj
 nnoremap k gk
 
 " Pane Creation
-map <silent> <C-a>j <C-w>s<C-j>
-map <silent> <C-a>l <C-w>v<C-l>
+map <silent> <Space><C-a>j <C-w>s<C-j>
+map <silent> <Space><C-a>l <C-w>v<C-l>
 
-" Pane Switching
+" Pane Switching (two options, remove whichever is not in use later
 map <silent> <C-h> <C-w>h
 map <silent> <C-j> <C-w>j
 map <silent> <C-k> <C-w>k
 map <silent> <C-l> <C-w>l
+map <silent> <C-a>h <C-w>h
+map <silent> <C-a>j <C-w>j
+map <silent> <C-a>k <C-w>k
+map <silent> <C-a>l <C-w>l
 
 " Pane Resizing
 nnoremap <Left> :vertical resize +1<CR>
@@ -98,6 +102,8 @@ nnoremap tt :tabedit<Space>
 
 " Tab Navigating
 " gt to go right, gT to go left
+nnoremap gh gT
+nnoremap gl gt
 
 " Tab Reorganzing
 nnoremap tmr :+tabmove<CR>
@@ -176,6 +182,20 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
+
+" }}}
+
+" NERDTree {{{2
+
+let NERDTreeShowHidden=1
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader><C-n> :NERDTree<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 
 " }}}
 

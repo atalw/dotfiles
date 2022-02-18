@@ -4,3 +4,6 @@
 [submodule "2022/vim/.vim/pack/vendor/start/nerdcommenter"]
 	path = 2022/vim/.vim/pack/vendor/start/nerdcommenter
 	url = https://github.com/preservim/nerdcommenter.git
+[submodule "2022/vim/.vim/pack/vendor/start/nerdtree"]
+	path = 2022/vim/.vim/pack/vendor/start/nerdtree
+	url = https://github.com/preservim/nerdtree.git
