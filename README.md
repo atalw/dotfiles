@@ -12,4 +12,4 @@ Symlink `.vimrc`
 > `ln -s path/to/git/dotfiles/.vimrc ~/.vimrc`
 
 Symlink `.vim`
-> `ln -s path/to/git/dotfiles/vim ~/.vim`
+> `ln -s path/to/git/dotfiles/.vim ~/.vim`
