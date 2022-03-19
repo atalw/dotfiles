@@ -3,9 +3,9 @@ filetype plugin on
 
 " syntax on
 syntax enable 
-" Important!!
+" colorscheme one 
 if has('termguicolors')
-"    set termguicolors
+   set termguicolors
 endif
 if has('gui_running')
     set background=light
@@ -15,9 +15,10 @@ endif
 " Fix italic comment background color issue
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
-let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_palette = gruvbox_material#get_palette('hard', 'original')
+" let g:gruvbox_material_palette.bg0 = '#1c1c1c'
 colorscheme gruvbox-material
-" hi Comment term=bold cterm=NONE ctermfg=245 gui=NONE guifg=#928374
+
 
 set autoindent
 set smarttab
@@ -30,7 +31,7 @@ set smartindent
 set backspace=indent,eol,start
 
 set encoding=utf-8
-set mouse=a
+set mouse=v
 
 set number
 set numberwidth=3
@@ -39,7 +40,8 @@ set wrap
 " set nowrap
 set breakindent
 set list
-set listchars=tab:\|\ ,trail:·,eol:¬
+" set listchars=tab:\|\ ,trail:·,eol:¬
+set listchars=tab:\|\ ,trail:·
 set scrolloff=5
 set colorcolumn=80
 
@@ -70,16 +72,13 @@ inoremap jk <Esc>:w<CR>
 " }}}
 
 " Navigating {{{2
-map J 10j
-map K 10k
+map J 20j
+map K 20k
 
 " Move vertically by visual line
 nnoremap j gj
 nnoremap k gk
 
-" Pane Creation
-map <silent> <Space><C-a>j <C-w>s<C-j>
-map <silent> <Space><C-a>l <C-w>v<C-l>
 
 " Pane Switching (two options, remove whichever is not in use later
 map <silent> <C-h> <C-w>h
@@ -126,8 +125,12 @@ noremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>wq :wq<CR>
 
+" Pane Creation
+map <silent> <leader><leader>j <C-w>s<C-j>
+map <silent> <leader><leader>l <C-w>v<C-l>
+
 " Pasting, Copying and Cutting
-map <Leader>p :set paste<CR>"*]p:set nopaste<CR>
+map <leader>p :set paste<CR>"*]p:set nopaste<CR>
 map <leader>y "+y
 
 " }}}
@@ -146,7 +149,7 @@ set statusline+=\ %F\ %M\ %Y\ %R
 set statusline+=%=
 
 " Status line right side.
-set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+" set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
 
 " Show the status on the second to last line.
 set laststatus=2
