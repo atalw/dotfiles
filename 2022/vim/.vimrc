@@ -1,5 +1,5 @@
 set nocompatible
-filetype plugin on
+filetype plugin indent on
 
 " syntax on
 syntax enable 
@@ -19,10 +19,10 @@ let g:gruvbox_material_palette = gruvbox_material#get_palette('hard', 'original'
 " let g:gruvbox_material_palette.bg0 = '#1c1c1c'
 colorscheme gruvbox-material
 
-
 set autoindent
 set smarttab
-set expandtab
+set noexpandtab " Use spaces instead of tabs 
+" set expandtab " Use spaces instead of tabs 
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -31,7 +31,8 @@ set smartindent
 set backspace=indent,eol,start
 
 set encoding=utf-8
-set mouse=v
+set mouse=a
+set clipboard=unnamed
 
 set number
 set numberwidth=3
@@ -43,7 +44,7 @@ set list
 " set listchars=tab:\|\ ,trail:·,eol:¬
 set listchars=tab:\|\ ,trail:·
 set scrolloff=5
-set colorcolumn=80
+set colorcolumn=100
 
 set incsearch
 set ignorecase
@@ -59,6 +60,25 @@ set wildmenu
 set wildmode=list:longest 
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*.swo
+
+set nofoldenable
+set nobackup
+set noswapfile
+set undofile
+set undodir=~/.vim/undodir
+
+let g:rust_fold = 1
+let b:rust_set_foldmethod = 1
+set foldlevelstart=10
+set foldnestmax=2
+
+let git_settings = system("git config --get vim.settings")
+if strlen(git_settings)
+    exe "set" git_settings
+endif
+
+" set nofoldenable
 
 " MAPPINGS ----------------------------------------- {{{1
 
@@ -112,8 +132,10 @@ nnoremap tml :-tabmove<CR>
 
 " Folding {{{2
 
-nnoremap <Tab> za
+" nnoremap <Tab> za
+" unmap <C-i>
 nnoremap <CR> za
+
 
 " }}}
 
@@ -166,6 +188,7 @@ augroup END
 
 " If the current file type is HTML, set indentation to 2 spaces.
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype rust setlocal tabstop=4 shiftwidth=4 noexpandtab
 
 " If Vim version is equal to or greater than 7.3 enable undofile.
 " This allows you to undo changes to a file even after saving it.
@@ -174,6 +197,64 @@ if version >= 703
     set undofile
     set undoreload=10000
 endif
+
+" Rust code folding
+" function! MakeRustFuncDefs()
+"     let b:RustFuncDefs = []
+
+"     let lnum = 1
+"     while lnum <= line('$')
+"         let current_line = getline(lnum)
+"         if match(current_line, '^ *\(pub \)\?fn') > -1
+"             call AddRustFunc(lnum)
+"         endif
+
+"         let lnum += 1
+"     endwhile
+" endfunction
+
+" function! AddRustFunc(lnum)
+"     let save_pos = getpos('.')
+"     call setpos('.', [0, a:lnum, 1, 0])
+
+"     call search('{')
+"     let start_lnum = line('.')
+
+"     let end_lnum = searchpair('{', '', '}', 'n')
+"     if end_lnum < 1
+"         call setpos('.', save_pos)
+"         return
+"     endif
+
+"     call add(b:RustFuncDefs, [start_lnum, end_lnum]);
+"     call setpos('.', save_pos)
+" endfunction
+
+" function! RustFold()
+"     if !exists("b:RustFuncDefs")
+"         call MakeRustFuncDefs()
+"     endif
+
+"     for [start_lnum, end_lnum] in b:RustFuncDefs
+"         if start_lnum > v:lnum
+"             return 0
+"         endif
+
+"         if v:lnum == start_lnum + 1
+"             return ">1"
+"         elseif v:lnum == end_lnum
+"             return "<1"
+"         elseif v:lnum > start_lnum && v:lnum < end_lnum
+"             return "="
+"         endif
+"     endfor
+" endfunction
+
+" autocmd FileType rust setlocal foldmethod=expr foldexpr=RustFold()
+
+" Save folds and load on next file open
+" autocmd BufWinLeave *.* mkview
+" autocmd BufWinEnter *.* silent loadview 
 
 " }}}
 
@@ -198,7 +279,10 @@ nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 
 " Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+" autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+
+" Nerdtree config for wildignore
+let NERDTreeRespectWildIgnore=1
 
 " }}}
 
@@ -218,15 +302,47 @@ inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
-" }}}
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use H to show documentation in preview window.
+nnoremap <silent> H :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+set updatetime=300
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Run the Code Lens action on the current line.
+nmap <leader>mm  <Plug>(coc-codelens-action)
 
 " }}}
 
+" FastFold {{{2
+
+" Don't update folds on save
+let g:fastfold_savehook = 0
+
+" }}}
+
+" IndentLine {{{
+" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 
-
-
-
+" }}}
+" }}}
 
 " Experimental 
 nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
