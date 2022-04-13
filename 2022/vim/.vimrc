@@ -65,8 +65,6 @@ set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*.sw
 set nofoldenable
 set nobackup
 set noswapfile
-set undofile
-set undodir=~/.vim/undodir
 
 let g:rust_fold = 1
 let b:rust_set_foldmethod = 1

@@ -3,3 +3,6 @@
 
 #Ignore swap files
 .*.sw*
+
+# Ignore vim undo files
+2022/vim/.vim/backup/*
