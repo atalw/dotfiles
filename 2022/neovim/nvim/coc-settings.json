@@ -1,0 +1,6 @@
+{
+    "coc.preferences.jumpCommand": "tabe",
+    "coc.source.buffer.enable": false,
+    "rust-analyzer.assist.importGranularity": "module",
+    "rust-analyzer.assist.importEnforceGranularity": true
+}
