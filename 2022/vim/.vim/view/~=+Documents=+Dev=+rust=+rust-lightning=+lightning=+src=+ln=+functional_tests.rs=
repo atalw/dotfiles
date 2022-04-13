@@ -299,5 +299,14 @@ normal! zt
 keepjumps 5167
 normal! 024|
 let &g:so = s:so_save | let &g:siso = s:siso_save
+let &fdl = &fdl
+let s:l = 287 - ((5 * winheight(0) + 28) / 57)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 287
+normal! 0
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :
