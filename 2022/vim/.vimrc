@@ -15,8 +15,24 @@ endif
 " Fix italic comment background color issue
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
+
 let g:gruvbox_material_palette = gruvbox_material#get_palette('hard', 'original')
-" let g:gruvbox_material_palette.bg0 = '#1c1c1c'
+let g:gruvbox_material_enable_bold = '0'
+let g:gruvbox_material_ui_contrast = 'high'
+let g:gruvbox_material_transparent_background = '1'
+let g:gruvbox_material_current_word = 'grey background'
+
+function! s:gruvbox_material_custom() abort
+	let l:palette = gruvbox_material#get_palette('dark', 'original')
+	call gruvbox_material#highlight('MatchParen', l:palette.none, l:palette.grey1)
+	" call gruvbox_material#highlight('Visual', l:palette.fg0, l:palette.grey2)
+endfunction
+
+augroup GruvboxMaterialCustom
+	autocmd!
+	autocmd ColorScheme gruvbox-material call s:gruvbox_material_custom()
+augroup END
+
 colorscheme gruvbox-material
 
 set autoindent
@@ -42,7 +58,7 @@ set wrap
 set breakindent
 set list
 " set listchars=tab:\|\ ,trail:·,eol:¬
-set listchars=tab:\|\ ,trail:·
+set listchars=tab:\ \ ,trail:·
 set scrolloff=5
 set colorcolumn=100
 
@@ -66,10 +82,11 @@ set nofoldenable
 set nobackup
 set noswapfile
 
-let g:rust_fold = 1
-let b:rust_set_foldmethod = 1
-set foldlevelstart=10
-set foldnestmax=2
+set foldminlines=30
+set foldnestmax=99
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+autocmd BufWinEnter * let &foldlevel = max(map(range(1, line('$')), 'foldlevel(v:val)'))
 
 let git_settings = system("git config --get vim.settings")
 if strlen(git_settings)
@@ -90,8 +107,8 @@ inoremap jk <Esc>:w<CR>
 " }}}
 
 " Navigating {{{2
-map J 20j
-map K 20k
+map J 15j
+map K 15k
 
 " Move vertically by visual line
 nnoremap j gj
@@ -196,58 +213,6 @@ if version >= 703
     set undoreload=10000
 endif
 
-" Rust code folding
-" function! MakeRustFuncDefs()
-"     let b:RustFuncDefs = []
-
-"     let lnum = 1
-"     while lnum <= line('$')
-"         let current_line = getline(lnum)
-"         if match(current_line, '^ *\(pub \)\?fn') > -1
-"             call AddRustFunc(lnum)
-"         endif
-
-"         let lnum += 1
-"     endwhile
-" endfunction
-
-" function! AddRustFunc(lnum)
-"     let save_pos = getpos('.')
-"     call setpos('.', [0, a:lnum, 1, 0])
-
-"     call search('{')
-"     let start_lnum = line('.')
-
-"     let end_lnum = searchpair('{', '', '}', 'n')
-"     if end_lnum < 1
-"         call setpos('.', save_pos)
-"         return
-"     endif
-
-"     call add(b:RustFuncDefs, [start_lnum, end_lnum]);
-"     call setpos('.', save_pos)
-" endfunction
-
-" function! RustFold()
-"     if !exists("b:RustFuncDefs")
-"         call MakeRustFuncDefs()
-"     endif
-
-"     for [start_lnum, end_lnum] in b:RustFuncDefs
-"         if start_lnum > v:lnum
-"             return 0
-"         endif
-
-"         if v:lnum == start_lnum + 1
-"             return ">1"
-"         elseif v:lnum == end_lnum
-"             return "<1"
-"         elseif v:lnum > start_lnum && v:lnum < end_lnum
-"             return "="
-"         endif
-"     endfor
-" endfunction
-
 " autocmd FileType rust setlocal foldmethod=expr foldexpr=RustFold()
 
 " Save folds and load on next file open
@@ -337,7 +302,6 @@ let g:fastfold_savehook = 0
 
 " IndentLine {{{
 " let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
 
 " }}}
 " }}}
