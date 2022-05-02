@@ -18,7 +18,7 @@ let &t_ZR="\e[23m"
 
 let g:gruvbox_material_palette = gruvbox_material#get_palette('hard', 'original')
 let g:gruvbox_material_enable_bold = '0'
-let g:gruvbox_material_ui_contrast = 'high'
+" let g:gruvbox_material_ui_contrast = 'high'
 let g:gruvbox_material_transparent_background = '1'
 let g:gruvbox_material_current_word = 'grey background'
 
@@ -56,9 +56,9 @@ set ruler
 set wrap
 " set nowrap
 set breakindent
-set list
+" set list
 " set listchars=tab:\|\ ,trail:·,eol:¬
-set listchars=tab:\ \ ,trail:·
+" set listchars=tab:\ \ ,trail:·
 set scrolloff=5
 set colorcolumn=100
 
