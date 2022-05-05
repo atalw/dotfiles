@@ -56,9 +56,10 @@ set ruler
 set wrap
 " set nowrap
 set breakindent
-" set list
+set list
 " set listchars=tab:\|\ ,trail:·,eol:¬
-" set listchars=tab:\ \ ,trail:·
+set listchars=tab:\ \ ,trail:·
+" set listchars=trail:·
 set scrolloff=5
 set colorcolumn=100
 
