@@ -63,8 +63,6 @@ return packer.startup(function(use)
 		},
 		config = function() require "plugins.configs.cmp" end
 	}
-	-- https://github.com/simrat39/rust-tools.nvim#configuration
-	require('rust-tools').setup({})
 
 	-- use {
 	--     'nvim-treesitter/nvim-treesitter',
