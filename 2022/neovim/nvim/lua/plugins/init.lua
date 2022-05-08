@@ -43,22 +43,37 @@ return packer.startup(function(use)
 	-- Packer can manage itself
 	use { "wbthomason/packer.nvim" }
 
+	use {
+		'nvim-telescope/telescope.nvim',
+		requires = { 
+			{'nvim-lua/plenary.nvim'},
+			{'nvim-telescope/telescope-ui-select.nvim' }
+		},
+		config = function() require "plugins.configs.telescope" end
+	}
+
 	use { -- Collection of configurations for built-in LSP client
 		'neovim/nvim-lspconfig',
 		config = function() require "plugins.configs.lspconfig" end
 	} 
-	use { "hrsh7th/cmp-nvim-lsp" }
-	use { 'simrat39/rust-tools.nvim' }
+
+	use {
+		'simrat39/rust-tools.nvim',
+		-- config in lspconfig.lua
+		-- config = function() require "plugins.configs.rust-tools" end
+	}
+
 	use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
 	use {
 		'hrsh7th/nvim-cmp', -- Autocompletion plugin
-		commit = "dbc72290295cfc63075dab9ea635260d2b72f2e5",
 		event = "InsertEnter", -- for lazyload
 		requires = {
+			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-calc", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }, -- Snippets source for nvim-cmp
 		},
 		config = function() require "plugins.configs.cmp" end
@@ -66,6 +81,7 @@ return packer.startup(function(use)
 
 	-- use {
 	--     'nvim-treesitter/nvim-treesitter',
+	--     -- commit = "868053edf587fd6f07111428b65cbd23144da860",
 	--     run = ':TSUpdate'
 	-- }
 
@@ -73,6 +89,7 @@ return packer.startup(function(use)
 		"lukas-reineke/indent-blankline.nvim",
 		config = function() require("plugins.configs.indent") end,
 	}
+
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

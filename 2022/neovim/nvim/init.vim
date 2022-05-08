@@ -238,10 +238,10 @@ let g:NERDCommentEmptyLines = 0
 
 let NERDTreeShowHidden=1
 
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <leader><C-n> :NERDTree<CR>
+" nnoremap <leader>n :NERDTreeFocus<CR>
+" nnoremap <leader><C-n> :NERDTree<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
+" nnoremap <leader>f :NERDTreeFind<CR>
 
 " Open the existing NERDTree on each new tab.
 " autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif

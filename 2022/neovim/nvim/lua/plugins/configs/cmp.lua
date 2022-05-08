@@ -10,43 +10,18 @@ local has_words_before = function()
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
 
--- local icons = {
---     Text = "",
---     Method = "",
---     Function = "",
---     Constructor = "⌘",
---     Field = "ﰠ",
---     Variable = "",
---     Class = "ﴯ",
---     Interface = "",
---     Module = "",
---     Property = "ﰠ",
---     Unit = "塞",
---     Value = "",
---     Enum = "",
---     Keyword = "廓",
---     Snippet = "",
---     Color = "",
---     File = "",
---     Reference = "",
---     Folder = "",
---     EnumMember = "",
---     Constant = "",
---     Struct = "פּ",
---     Event = "",
---     Operator = "",
---     TypeParameter = "",
--- }
-
 local luasnip = require 'luasnip'
 
 -- local cmp = require 'cmp'
 cmp.setup {
 	fields = { "kind", "abbr", "menu" },
 	completion = {
-		completeopt = "menu,menuone,noinsert",
+		completeopt = "menu,menuone,noselect",
 		keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
 		keyword_length = 1,
+	},
+	formatting = {
+		fields = { "abbr", "kind", "menu" }
 	},
 	snippet = {
 		expand = function(args)
@@ -59,16 +34,18 @@ cmp.setup {
             behavior = cmp.ConfirmBehavior.Replace,
             select = false,
         },	
-		['<Tab>'] = cmp.mapping(function(fallback)
+		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
+			elseif has_words_before() then
+				cmp.complete()
 			else
 				fallback()
 			end
-		end, { 'i', 's' }),
-		['<S-Tab>'] = cmp.mapping(function(fallback)
+		end, { "i", "s" }),
+	['<S-Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
 			elseif luasnip.jumpable(-1) then
@@ -84,6 +61,7 @@ cmp.setup {
 		{ name = 'buffer' },
 		{ name = 'calc' },
 		{ name = 'luasnip' },
+		{ name = 'nvim_lsp_signature_help' }
 	},
 	preselect = cmp.PreselectMode.None,
 }

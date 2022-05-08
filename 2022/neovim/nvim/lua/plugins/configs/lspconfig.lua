@@ -48,7 +48,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-	-- vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
+	vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
 	vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, {})
 end
 
@@ -60,8 +60,60 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
 local servers = { 'rust_analyzer' }
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+  local serverOpts = {
+	  on_attach = on_attach,
+	  capabilities = capabilities,
   }
+
+  if lsp == "rust_analyzer" then
+	  local ok_rt, rust_tools = pcall(require, "rust-tools")
+	  if not ok_rt then
+		  print("Failed to load rust tools, will set up `rust_analyzer` without `rust-tools`.")
+	  else
+		  -- https://github.com/simrat39/rust-tools.nvim#configuration
+		  rust_tools.setup({
+			  server = serverOpts,
+			  tools = {
+				  autoSetHints = true,
+				  hover_with_actions = true,
+				  runnables = { use_telescope = true },
+				  inlay_hints = { 
+					  show_parameter_hints = true,
+					  only_current_line = false,
+					  highlight = "Comment"
+				  },
+				  hover_actions = { 
+					  auto_focus = false 
+				  }
+			  },
+		  })
+		  goto continue
+	  end
+  end
+
+  lspconfig[lsp].setup(serverOpts)
+  ::continue::
 end
+
+-- https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
+-- We don't want to call lspconfig.rust_analyzer.setup() when using rust-tools. See
+-- * https://github.com/simrat39/rust-tools.nvim/issues/183
+-- * https://github.com/simrat39/rust-tools.nvim/issues/177
+-- lspconfig.rust_analyzer.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     settings = {
+--         ["rust-analyzer"] = {
+--             assist = {
+--                 importGranularity = "module",
+--                 importPrefix = "self",
+--             },
+--             hover = {
+--                 documentation = "true",
+--             },
+--             lens = {
+--                 enable = "true",
+--             }
+--         }
+--     }
+-- }
