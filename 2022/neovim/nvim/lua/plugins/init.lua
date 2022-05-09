@@ -63,6 +63,7 @@ return packer.startup(function(use)
 		-- config in lspconfig.lua
 		-- config = function() require "plugins.configs.rust-tools" end
 	}
+	use { "rust-lang/rust.vim" }
 
 	use 'L3MON4D3/LuaSnip' -- Snippets plugin
 

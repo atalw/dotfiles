@@ -4,6 +4,13 @@ if not ok then
 	return
 end
 
+vim.diagnostic.config({
+	virtual_text = false,
+})
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 -- Diagnostic keymaps
@@ -15,11 +22,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 -- LSP settings
 local on_attach = function(client, bufnr)
 	if client.resolved_capabilities.document_highlight then
-		vim.cmd [[
-		hi! LspReferenceRead cterm=bold ctermbg=red guibg=Grey
-		hi! LspReferenceText cterm=bold ctermbg=red guibg=Grey
-		hi! LspReferenceWrite cterm=bold ctermbg=red guibg=Grey
-		]]
 		vim.api.nvim_create_augroup('lsp_document_highlight', {})
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			group = 'lsp_document_highlight',

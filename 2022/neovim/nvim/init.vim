@@ -5,14 +5,14 @@ filetype plugin indent on
 " syntax on
 syntax enable 
 " colorscheme one 
-if has('termguicolors')
-   set termguicolors
-endif
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
+" if has('termguicolors')
+"    set termguicolors
+" endif
+" if has('gui_running')
+"     set background=light
+" else
+"     set background=dark
+" endif
 " Fix italic comment background color issue
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
@@ -29,12 +29,84 @@ function! s:gruvbox_material_custom() abort
 	" call gruvbox_material#highlight('Visual', l:palette.fg0, l:palette.grey2)
 endfunction
 
-augroup GruvboxMaterialCustom
-	autocmd!
-	autocmd ColorScheme gruvbox-material call s:gruvbox_material_custom()
-augroup END
+" augroup GruvboxMaterialCustom
+"     autocmd!
+"     autocmd ColorScheme gruvbox-material call s:gruvbox_material_custom()
+" augroup END
 
-colorscheme gruvbox-material
+" colorscheme gruvbox-material
+colorscheme peachpuff
+set background=dark
+
+" https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+" Colours
+" black = 234
+" dark grey = 237
+" light grey = 243
+" white = 15
+" orange = 208
+" red = 167
+" blue = 80
+" green = 114
+" yellow = 186
+" pink = 176
+"
+" UI
+hi Normal ctermbg=234 ctermfg=15
+hi Folded ctermbg=237 ctermfg=15
+hi StatusLine cterm=None ctermbg=237 ctermfg=15
+hi StatusLineNC cterm=None ctermbg=237 ctermfg=15
+hi TabLineFill cterm=None ctermbg=234 ctermfg=15 "(tab bg)
+hi TabLine cterm=None ctermbg=237 ctermfg=15 "(unselected tab)
+hi TabLineSel cterm=None ctermbg=234 ctermfg=15 "(selected tab)
+hi VertSplit cterm=None ctermbg=237 ctermfg=15
+hi LineNr ctermfg=243
+hi ColorColumn ctermbg=237
+hi SignColumn ctermbg=234
+hi Search ctermbg=186 ctermfg=234
+hi NonText ctermfg=243
+" nvim specific
+hi DiagnosticError ctermfg=167
+hi DiagnosticVirtualTextError ctermfg=167
+hi DiagnosticFloatingError ctermfg=167
+hi DiagnosticWarn ctermfg=186
+hi DiagnosticVirtualTextWarn ctermfg=186
+hi DiagnosticFloatingWarning ctermfg=186
+hi DiagnosticInfo ctermfg=243
+hi DiagnosticVirtualTextInfo ctermfg=243
+hi DiagnosticFloatingInformation ctermfg=243
+hi DiagnosticHint ctermfg=114
+hi DiagnosticVirtualTextHint ctermfg=114
+hi DiagnosticFloatingHint ctermfg=114
+hi LspReferenceText ctermbg=237
+hi LspReferenceRead ctermbg=237
+hi LspReferenceWrite ctermbg=237
+" Syntax
+hi Comment ctermfg=243
+hi SpecialComment ctermfg=243
+hi Identifier ctermfg=71
+hi Type ctermfg=208
+hi Statement ctermfg=167
+hi Constant ctermfg=192 "yellow?
+hi PreProc ctermfg=115 "teal
+hi Special ctermfg=15
+hi Macro ctermfg=80
+hi Function ctermfg=114
+hi Include ctermfg=208
+" Hover
+hi NormalFloat ctermbg=237 ctermfg=15
+hi FloatBorder ctermbg=237 ctermfg=15
+hi Pmenu ctermbg=237 ctermfg=15
+hi PmenuSBar ctermbg=237 ctermfg=15
+" Indent-blankline
+hi IndentBlanklineChar ctermfg=241
+hi IndentBlanklineContextChar ctermfg=186
+" Rust.vim
+hi rustTrait ctermfg=176
+hi rustEnum ctermfg=176
+hi rustEnumVariant ctermfg=176
+hi rustSelf ctermfg=80
+hi rustStructure ctermfg=208
 
 set autoindent
 set smarttab
