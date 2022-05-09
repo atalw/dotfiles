@@ -44,7 +44,7 @@ set background=dark
 " dark grey = 237
 " light grey = 243
 " white = 15
-" orange = 208
+" orange = 172
 " red = 167
 " blue = 80
 " green = 114
@@ -65,6 +65,12 @@ hi ColorColumn ctermbg=237
 hi SignColumn ctermbg=234
 hi Search ctermbg=186 ctermfg=234
 hi NonText ctermfg=243
+hi DiffAdd ctermfg=114
+hi DiffChange ctermfg=80
+hi DiffDelete ctermfg=167
+hi DiffText ctermbg=234 ctermfg=186
+hi Visual ctermbg=234
+hi VisualNOS ctermbg=234
 " nvim specific
 hi DiagnosticError ctermfg=167
 hi DiagnosticVirtualTextError ctermfg=167
@@ -85,14 +91,16 @@ hi LspReferenceWrite ctermbg=237
 hi Comment ctermfg=243
 hi SpecialComment ctermfg=243
 hi Identifier ctermfg=71
-hi Type ctermfg=208
+hi Type ctermfg=172
 hi Statement ctermfg=167
 hi Constant ctermfg=192 "yellow?
 hi PreProc ctermfg=115 "teal
 hi Special ctermfg=15
 hi Macro ctermfg=80
 hi Function ctermfg=114
-hi Include ctermfg=208
+hi Include ctermfg=172
+hi Directory ctermfg=243
+hi SpecialKey ctermfg=80
 " Hover
 hi NormalFloat ctermbg=237 ctermfg=15
 hi FloatBorder ctermbg=237 ctermfg=15
@@ -106,7 +114,9 @@ hi rustTrait ctermfg=176
 hi rustEnum ctermfg=176
 hi rustEnumVariant ctermfg=176
 hi rustSelf ctermfg=80
-hi rustStructure ctermfg=208
+hi rustStructure ctermfg=172
+" Telescope
+hi TelescopeSelection ctermbg=237 ctermfg=15
 
 set autoindent
 set smarttab
@@ -221,9 +231,9 @@ nnoremap tml :-tabmove<CR>
 
 " Folding {{{2
 
-" nnoremap <Tab> za
+nnoremap <Tab> za
 " unmap <C-i>
-nnoremap <CR> za
+" nnoremap <CR> za
 
 
 " }}}
