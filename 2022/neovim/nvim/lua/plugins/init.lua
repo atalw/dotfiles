@@ -46,16 +46,17 @@ return packer.startup(function(use)
 	use {
 		'nvim-telescope/telescope.nvim',
 		requires = { 
-			{'nvim-lua/plenary.nvim'},
-			{'nvim-telescope/telescope-ui-select.nvim' }
+			{ 'nvim-lua/plenary.nvim' },
+			{ 'nvim-telescope/telescope-ui-select.nvim' },
+			{ "nvim-telescope/telescope-file-browser.nvim" }
 		},
 		config = function() require "plugins.configs.telescope" end
 	}
-
-	use { -- Collection of configurations for built-in LSP client
+	-- Collection of configurations for built-in LSP client
+	use {
 		'neovim/nvim-lspconfig',
 		config = function() require "plugins.configs.lspconfig" end
-	} 
+	}
 
 	use {
 		'simrat39/rust-tools.nvim',
@@ -79,11 +80,11 @@ return packer.startup(function(use)
 		config = function() require "plugins.configs.cmp" end
 	}
 
-	-- use {
-	--     'nvim-treesitter/nvim-treesitter',
-	--     -- commit = "868053edf587fd6f07111428b65cbd23144da860",
-	--     run = ':TSUpdate'
-	-- }
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate',
+		config = function() require "plugins.configs.treesitter" end
+	}
 
 	use {
 		"lukas-reineke/indent-blankline.nvim",

@@ -5,8 +5,8 @@ if not ok then
 end
 
 indent.setup {
-	char = "‚ñè",
-	context_char = "‚ñè",
+	char = "│",
+	context_char = "│",
 	show_first_indent_level = false,
 	show_current_context = true,
 	show_current_context_start = false,
