@@ -8,11 +8,11 @@ vim.cmd("set foldmethod=expr")
 vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
 
 treesitter.setup {
-	ensure_installed = { "rust" },
+    ensure_installed = { "rust" },
 
-	highlight = {
-		enable = false,
-		additional_vim_regex_highlighting = false
-	}
+    highlight = {
+        enable = false,
+        additional_vim_regex_highlighting = false
+    }
 }
 

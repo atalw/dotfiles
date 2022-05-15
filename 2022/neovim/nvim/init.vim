@@ -1,4 +1,3 @@
-
 set nocompatible
 filetype plugin indent on
 
@@ -24,9 +23,9 @@ let g:gruvbox_material_transparent_background = '1'
 let g:gruvbox_material_current_word = 'grey background'
 
 function! s:gruvbox_material_custom() abort
-	let l:palette = gruvbox_material#get_palette('dark', 'original')
-	call gruvbox_material#highlight('MatchParen', l:palette.none, l:palette.grey1)
-	" call gruvbox_material#highlight('Visual', l:palette.fg0, l:palette.grey2)
+    let l:palette = gruvbox_material#get_palette('dark', 'original')
+    call gruvbox_material#highlight('MatchParen', l:palette.none, l:palette.grey1)
+    " call gruvbox_material#highlight('Visual', l:palette.fg0, l:palette.grey2)
 endfunction
 
 " augroup GruvboxMaterialCustom
@@ -41,15 +40,18 @@ set background=dark
 " https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 " Colours
 " black = 234
+" dark dark grey = 235
 " dark grey = 237
 " light grey = 243
 " white = 15
 " orange = 172
 " red = 167
-" blue = 80
+" blue = 75
 " green = 114
+" dark green = 72
 " yellow = 186
 " pink = 176
+" purple = 105
 "
 " UI
 hi Normal ctermbg=234 ctermfg=15
@@ -61,12 +63,14 @@ hi TabLine cterm=None ctermbg=237 ctermfg=15 "(unselected tab)
 hi TabLineSel cterm=None ctermbg=234 ctermfg=15 "(selected tab)
 hi VertSplit cterm=None ctermbg=237 ctermfg=15
 hi LineNr ctermfg=243
-hi ColorColumn ctermbg=237
+hi ColorColumn ctermbg=235
 hi SignColumn ctermbg=234
-hi Search ctermbg=186 ctermfg=234
+hi Search ctermbg=75 ctermfg=15
+hi IncSearch ctermbg=15 ctermfg=75
+hi SpecialKey ctermfg=75 ctermbg=167
 hi NonText ctermfg=243
 hi DiffAdd ctermfg=114
-hi DiffChange ctermfg=80
+hi DiffChange ctermfg=81
 hi DiffDelete ctermfg=167
 hi DiffText ctermbg=234 ctermfg=186
 hi Visual ctermbg=234
@@ -93,35 +97,38 @@ hi SpecialComment ctermfg=243
 hi Identifier ctermfg=71
 hi Type ctermfg=172
 hi Statement ctermfg=167
-hi Constant ctermfg=192 "yellow?
-hi PreProc ctermfg=115 "teal
+hi String ctermfg=114
+hi Constant ctermfg=186
+hi PreProc ctermfg=105
 hi Special ctermfg=15
-hi Macro ctermfg=80
-hi Function ctermfg=114
+hi Macro ctermfg=75
+hi Precondit ctermfg=75
+hi Function ctermfg=72
 hi Include ctermfg=172
 hi Directory ctermfg=243
-hi SpecialKey ctermfg=80
 " Hover
 hi NormalFloat ctermbg=237 ctermfg=15
 hi FloatBorder ctermbg=237 ctermfg=15
 hi Pmenu ctermbg=237 ctermfg=15
 hi PmenuSBar ctermbg=237 ctermfg=15
 " Indent-blankline
-hi IndentBlanklineChar ctermfg=241
+hi IndentBlanklineChar ctermfg=237
 hi IndentBlanklineContextChar ctermfg=186
 " Rust.vim
-hi rustTrait ctermfg=176
-hi rustEnum ctermfg=176
-hi rustEnumVariant ctermfg=176
-hi rustSelf ctermfg=80
+hi rustTrait ctermfg=186
+hi rustEnum ctermfg=105
+hi rustEnumVariant ctermfg=105
+hi rustSelf ctermfg=105
 hi rustStructure ctermfg=172
 " Telescope
 hi TelescopeSelection ctermbg=237 ctermfg=15
 
+" match TrailingSpace /\s\+$/
+" hi TrailingSpace ctermbg=167
+
 set autoindent
 set smarttab
-set noexpandtab " Use spaces instead of tabs 
-" set expandtab " Use spaces instead of tabs 
+set expandtab " Use spaces instead of tabs
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -142,7 +149,6 @@ set breakindent
 set list
 " set listchars=tab:\|\ ,trail:·,eol:¬
 set listchars=tab:\ \ ,trail:·
-" set listchars=trail:·
 set scrolloff=5
 set colorcolumn=100
 
@@ -176,6 +182,15 @@ let git_settings = system("git config --get vim.settings")
 if strlen(git_settings)
     exe "set" git_settings
 endif
+let git_vars = system("git config --get vim.vars")
+if strlen(git_vars)
+    for s in split(git_vars)
+        exe "let" s
+    endfor
+endif
+
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
 
 " set nofoldenable
 
@@ -286,8 +301,8 @@ set laststatus=2
 " augroup END
 
 " If the current file type is HTML, set indentation to 2 spaces.
-autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd Filetype rust setlocal tabstop=4 shiftwidth=4 noexpandtab
+" autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
+" autocmd Filetype rust setlocal tabstop=4 shiftwidth=4 noexpandtab
 
 " If Vim version is equal to or greater than 7.3 enable undofile.
 " This allows you to undo changes to a file even after saving it.
@@ -316,78 +331,6 @@ let g:NERDCommentEmptyLines = 0
 
 " }}}
 
-" NERDTree {{{2
-
-let NERDTreeShowHidden=1
-
-" nnoremap <leader>n :NERDTreeFocus<CR>
-" nnoremap <leader><C-n> :NERDTree<CR>
-nnoremap <leader>t :NERDTreeToggle<CR>
-" nnoremap <leader>f :NERDTreeFind<CR>
-
-" Open the existing NERDTree on each new tab.
-" autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
-
-" Nerdtree config for wildignore
-let NERDTreeRespectWildIgnore=1
-
-" }}}
-
-" coc.nvim {{{
-
-" use <c-space>for trigger completion
-"inoremap <silent><expr> <c-space> coc#refresh()
-" inoremap <silent><expr> <NUL> coc#refresh()
-
-" " use <tab> for trigger completion and navigate to the next complete item
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction
-
-" inoremap <silent><expr> <Tab>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<Tab>" :
-"       \ coc#refresh()
-
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-
-" " Use H to show documentation in preview window.
-" nnoremap <silent> H :call <SID>show_documentation()<CR>
-
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   elseif (coc#rpc#ready())
-"     call CocActionAsync('doHover')
-"   else
-"     execute '!' . &keywordprg . " " . expand('<cword>')
-"   endif
-" endfunction
-
-" set updatetime=300
-" " Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" " Run the Code Lens action on the current line.
-" nmap <leader>mm  <Plug>(coc-codelens-action)
-
-" " }}}
-
-" " FastFold {{{2
-
-" " Don't update folds on save
-" let g:fastfold_savehook = 0
-
-" }}}
-
-" IndentLine {{{
-" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
-" }}}
 " }}}
 
 " Experimental 
