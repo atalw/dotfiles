@@ -87,7 +87,7 @@ for _, lsp in ipairs(servers) do
                     settings = {
                         ["rust-analyzer"] = {
                             cargo = {
-                                allFeatures = false,
+                                -- allFeatures = true,
                                 -- features = {"keys-bip39"},
                             },
                             checkOnSave = {

@@ -74,8 +74,8 @@ exec "hi DiffAdd ctermfg=" .s:green
 exec "hi DiffChange ctermfg=" .s:bluishgreen
 exec "hi DiffDelete ctermfg=" .s:red
 exec "hi DiffText ctermbg=" .s:black "ctermfg=" .s:yellow
-exec "hi Visual ctermbg=" .s:black
-exec "hi VisualNOS ctermbg=" .s:black
+exec "hi Visual cterm=reverse ctermbg=" .s:black
+exec "hi VisualNOS cterm=reverse ctermbg=" .s:black
 " nvim specific
 exec "hi DiagnosticError ctermfg=" .s:red
 exec "hi DiagnosticVirtualTextError ctermfg=" .s:red
