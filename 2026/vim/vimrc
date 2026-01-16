@@ -1,0 +1,105 @@
+set nocompatible
+filetype plugin indent on
+syntax enable
+
+" -----------------------------------------------------------------------------
+" Basic Settings
+" -----------------------------------------------------------------------------
+
+" Theme
+set background=dark
+if has('termguicolors')
+    set termguicolors
+endif
+" Initialize gruvbox settings before loading scheme
+let g:gruvbox_material_palette = 'original'
+let g:gruvbox_material_enable_bold = 0
+let g:gruvbox_material_transparent_background = 1
+colorscheme gruvbox-material
+
+set autoindent
+set smarttab
+set expandtab       " Use spaces instead of tabs
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set smartindent
+set backspace=indent,eol,start
+set encoding=utf-8
+set mouse=a
+set clipboard=unnamed
+
+set number
+set numberwidth=3
+set ruler
+set wrap
+set breakindent
+set scrolloff=5
+set incsearch
+set ignorecase
+set smartcase
+set showcmd
+set showmode
+set showmatch
+set hlsearch
+set history=1000
+
+set nofoldenable
+set nobackup
+set noswapfile
+
+" -----------------------------------------------------------------------------
+" Mappings
+" -----------------------------------------------------------------------------
+
+" Escaping
+inoremap jj <Esc>:w<CR>
+inoremap jk <Esc>:w<CR>
+
+" Navigation
+map J 15j
+map K 15k
+nnoremap j gj
+nnoremap k gk
+
+" Pane Switching
+map <silent> <C-h> <C-w>h
+map <silent> <C-j> <C-w>j
+map <silent> <C-k> <C-w>k
+map <silent> <C-l> <C-w>l
+
+" Pane Resizing
+nnoremap <Left> :vertical resize +1<CR>
+nnoremap <Right> :vertical resize -1<CR>
+nnoremap <Up> :resize +1<CR>
+nnoremap <Down> :resize -1<CR>
+
+" Tab Navigation
+nnoremap tt :tabedit<Space>
+nnoremap gh gT
+nnoremap gl gt
+
+" -----------------------------------------------------------------------------
+" Leader Mappings
+" -----------------------------------------------------------------------------
+let mapleader=" "
+
+noremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>wq :wq<CR>
+
+" Pane Creation
+map <silent> <leader><leader>j <C-w>s<C-j>
+map <silent> <leader><leader>l <C-w>v<C-l>
+
+" Paste/Copy
+map <leader>p :set paste<CR>"*]p:set nopaste<CR>
+map <leader>y "+y
+
+" -----------------------------------------------------------------------------
+" Status Line
+" -----------------------------------------------------------------------------
+set statusline=
+set statusline+=\ %F\ %M\ %Y\ %R
+set statusline+=%=
+set laststatus=2
