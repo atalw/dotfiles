@@ -75,6 +75,7 @@ link_file() {
 # 1. Vim
 link_file "$DOTFILES_DIR/vim/vimrc" "$HOME/.vimrc"
 link_file "$DOTFILES_DIR/vim/colors" "$HOME/.vim/colors"
+link_file "$DOTFILES_DIR/vim/autoload" "$HOME/.vim/autoload"
 
 # 2. Fish
 link_file "$DOTFILES_DIR/fish/config.fish" "$HOME/.config/fish/config.fish"
